@@ -7,15 +7,16 @@ message(STATUS "Third-party: creating target 'CoMISo::CoMISo'")
 include(FetchContent)
 FetchContent_Declare(
     comiso
-    GIT_REPOSITORY https://github.com/libigl/CoMISo.git
-    GIT_TAG 536440e714f412e7ef6c0b96b90ba37b1531bb39
+    GIT_REPOSITORY https://github.com/marston2yu/CoMISo.git
+    GIT_TAG 631fdebe063774b7e2cf048cc9c7c0b450533b8d
 )
 
 include(eigen)
 
+set(COMISO_NO_INSTALL True)
 FetchContent_MakeAvailable(comiso)
 
-add_library(CoMISo::CoMISo ALIAS CoMISo)
+# add_library(CoMISo::CoMISo ALIAS CoMISo)
 
 # Copy .hh headers into a subfolder `CoMISo/`
 file(GLOB_RECURSE INC_FILES "${comiso_SOURCE_DIR}/*.hh" "${comiso_SOURCE_DIR}/*.cc")

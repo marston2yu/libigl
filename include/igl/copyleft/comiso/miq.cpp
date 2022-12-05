@@ -1124,14 +1124,15 @@ IGL_INLINE void igl::copyleft::comiso::PoissonSolver<DerivedV, DerivedF>::mixedI
 
   solver.misolver().set_local_iters(localIter);
 
-  solver.misolver().set_direct_rounding(directRound);
+  if (directRound)
+    solver.misolver().set_direct_rounding();
 
   std::sort(ids_to_round.begin(),ids_to_round.end());
   auto new_end=std::unique(ids_to_round.begin(),ids_to_round.end());
   long int dist = distance(ids_to_round.begin(),new_end);
   ids_to_round.resize(dist);
 
-  solver.solve( C, A, X, B, ids_to_round, 0.0, false, false);
+  solver.solve( C, A, X, B, ids_to_round, 0.0, false);
 }
 
 template <typename DerivedV, typename DerivedF>
