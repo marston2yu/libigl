@@ -29,8 +29,8 @@ option(HUNTER_ENABLED "Enable Hunter package manager support" OFF)
 if(HUNTER_ENABLED)
     include("cmake/misc/HunterGate.cmake")
     HunterGate(
-        URL "https://github.com/cpp-pm/hunter/archive/v0.23.300.tar.gz"
-        SHA1 "1151d539465d9cdbc880ee30f794864aec11c448"
+        URL "https://github.com/cpp-pm/hunter/archive/v0.24.8.tar.gz"
+        SHA1 "ca7838dded9a1811b04ffd56175f629e0af82d3d"
     )
 endif()
 
@@ -53,7 +53,6 @@ endif()
 
 set_property(GLOBAL PROPERTY __igl_module_path ${CMAKE_MODULE_PATH})
 
-# Check for gmp + mpfr and enable cork / cgal modules accordingly
 set(LIBIGL_DEFAULT_CGAL ${LIBIGL_TOPLEVEL_PROJECT})
 set(MATLAB_ADDITIONAL_VERSIONS
     "R2022b=10.3"
@@ -64,15 +63,6 @@ set(MATLAB_ADDITIONAL_VERSIONS
 set(LIBIGL_DEFAULT_MATLAB ${LIBIGL_TOPLEVEL_PROJECT})
 set(LIBIGL_DEFAULT_MOSEK ${LIBIGL_TOPLEVEL_PROJECT})
 if(LIBIGL_TOPLEVEL_PROJECT)
-    if(NOT WIN32)
-        find_package(GMP QUIET)
-        find_package(MPFR QUIET)
-        if(NOT (TARGET gmp::gmp AND TARGET mpfr::mpfr))
-            set(LIBIGL_DEFAULT_CGAL OFF)
-            message(WARNING "Missing dependencies GMP and MPFR. The libigl modules for cork and cgal "
-                            "will be disabled by default.")
-        endif()
-    endif()
     find_package(Matlab QUIET)
     if(NOT Matlab_FOUND)
         set(LIBIGL_DEFAULT_MATLAB OFF)
@@ -103,6 +93,7 @@ option(LIBIGL_IMGUI            "Build target igl::imgui"            ${LIBIGL_TOP
 option(LIBIGL_OPENGL           "Build target igl::opengl"           ${LIBIGL_TOPLEVEL_PROJECT})
 option(LIBIGL_PNG              "Build target igl::png"              ${LIBIGL_TOPLEVEL_PROJECT})
 option(LIBIGL_PREDICATES       "Build target igl::predicates"       ${LIBIGL_TOPLEVEL_PROJECT})
+option(LIBIGL_SPECTRA          "Build target igl::spectra"          ${LIBIGL_TOPLEVEL_PROJECT})
 option(LIBIGL_XML              "Build target igl::xml"              ${LIBIGL_TOPLEVEL_PROJECT})
 
 # Copyleft modules. These modules are available under GPL license, and their dependencies are

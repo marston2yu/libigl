@@ -285,7 +285,17 @@ IGL_INLINE void igl::opengl::ViewerData::set_data(
     igl::colormap(cmap,Eigen::VectorXd::LinSpaced(num_steps,0,1).eval(),0,1,CM);
     set_colormap(CM);
   }
-  set_uv(((D.array()-caxis_min)/(caxis_max-caxis_min)).replicate(1,2));
+  Eigen::MatrixXd UV = ((D.array()-caxis_min)/(caxis_max-caxis_min)).replicate(1,2);
+  if(D.size() == V.rows())
+  {
+    set_uv(UV);
+  }else
+  {
+    assert(D.size() == F.rows());
+    Eigen::MatrixXi UV_F = 
+      Eigen::VectorXi::LinSpaced(F.rows(),0,F.rows()-1).replicate(1,3);
+    set_uv(UV,UV_F);
+  }
 }
 
 IGL_INLINE void igl::opengl::ViewerData::set_data(const Eigen::VectorXd & D, igl::ColorMapType cmap, int num_steps)
@@ -365,7 +375,13 @@ IGL_INLINE void igl::opengl::ViewerData::set_edges(
     {
       color<<C.row(e);
     }
-    lines.row(e)<< P.row(E(e,0)), P.row(E(e,1)), color;
+    if(P.cols() == 2)
+    {
+      lines.row(e)<< P.row(E(e,0)),0, P.row(E(e,1)),0, color;
+    }else
+    {
+      lines.row(e)<< P.row(E(e,0)), P.row(E(e,1)), color;
+    }
   }
   dirty |= MeshGL::DIRTY_OVERLAY_LINES;
 }
