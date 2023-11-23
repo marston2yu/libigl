@@ -185,8 +185,11 @@ namespace glfw
       return(-1);
     }
     #if defined(DEBUG) || defined(_DEBUG)
-      printf("OpenGL Version %d.%d loaded\n", GLVersion.major, GLVersion.minor);
-      int major, minor, rev;
+      int major, minor;
+      glGetIntegerv(GL_MAJOR_VERSION, &major);
+      glGetIntegerv(GL_MINOR_VERSION, &minor);
+      printf("OpenGL Version %d.%d loaded\n", major, minor);
+      int rev;
       major = glfwGetWindowAttrib(window, GLFW_CONTEXT_VERSION_MAJOR);
       minor = glfwGetWindowAttrib(window, GLFW_CONTEXT_VERSION_MINOR);
       rev = glfwGetWindowAttrib(window, GLFW_CONTEXT_REVISION);
