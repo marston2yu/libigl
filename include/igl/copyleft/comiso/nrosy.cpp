@@ -392,7 +392,6 @@ void igl::copyleft::comiso::NRosyField::solveRoundings()
   COMISO::ConstrainedSolver cs;
   cs.solve(gmm_C, gmm_A, x, gmm_b, ids_to_round, 0.0, false);
 
-
   // Copy the result back
   for(unsigned i=0; i<F.rows(); ++i)
     if (tag_t[i] != -1)

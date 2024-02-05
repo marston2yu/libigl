@@ -13,9 +13,10 @@ FetchContent_Declare(
 
 include(eigen)
 
+set(COMISO_NO_INSTALL True)
 FetchContent_MakeAvailable(comiso)
 
-add_library(CoMISo::CoMISo ALIAS CoMISo)
+# add_library(CoMISo::CoMISo ALIAS CoMISo)
 
 # Copy .hh headers into a subfolder `CoMISo/`
 file(GLOB_RECURSE INC_FILES "${comiso_SOURCE_DIR}/*.hh" "${comiso_SOURCE_DIR}/*.cc")
