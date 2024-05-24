@@ -8,7 +8,7 @@ include(FetchContent)
 FetchContent_Declare(
     comiso
     GIT_REPOSITORY https://github.com/marston2yu/CoMISo.git
-    GIT_TAG 8547fad36569803305d877648bd6f54278cc388e
+    GIT_TAG b103cfd204882f71926301e5b1f75ea4d8ad6f11
 )
 
 include(eigen)
